@@ -25,3 +25,5 @@ Para baixar a imagem e executar:
 
 ### Estrutura
 Para uso da API Rest foi criado requições exemplos no Postman:
+
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://www.postman.com/tjulioh/workspace/api-erp-senior/overview)
