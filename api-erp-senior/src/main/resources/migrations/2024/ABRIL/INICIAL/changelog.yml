@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: INICIAL.sql
+      relativeToChangelogFile: true
+  - include:
+      file: CARGA_INICIAL.sql
+      relativeToChangelogFile: true

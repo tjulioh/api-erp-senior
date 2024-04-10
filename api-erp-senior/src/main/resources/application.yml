@@ -1,0 +1,40 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  session:
+    jdbc:
+      initialize-schema: always
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  datasource:
+    url:  ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+  liquibase:
+    url: ${SPRING_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    user: ${SPRING_LIQUIBASE_USER:postgres}
+    password: ${SPRING_LIQUIBASE_PASSWORD:postgres}
+    enabled: true
+    drop-first: true
+    change-log: changelog.yml
+
+tjulioh:
+  allowed:
+    origins: ${TJULIOH_ALLOWED_ORIGINS:http://localhost:4200}
+
+logging:
+  level:
+    sql: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+#    org:
+#      hibernate:
+#        sql: DEBUG
+#      springframework:
+#        web: DEBUG
+#        security: DEBUG
+#    dev:
+#      tjulioh: DEBUG

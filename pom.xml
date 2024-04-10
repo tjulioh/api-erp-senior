@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dev.tjulioh</groupId>
+    <artifactId>erp-senior</artifactId>
+    <packaging>pom</packaging>
+    <version>dev</version>
+    <description>Agrupador do ERP Senior</description>
+    <modules>
+        <module>api-erp-senior</module>
+    </modules>
+    <properties>
+        <java.version>21</java.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <docker.image.prefix>tjulioh</docker.image.prefix>
+        <skipTests>true</skipTests>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>1.21</source>
+                    <target>1.21</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>enviroment</name>
+                    <value>local</value>
+                </property>
+            </activation>
+            <properties>
+                    <enviroment>local</enviroment>
+                    <skipPageMappings>true</skipPageMappings>
+            </properties>
+        </profile>
+    </profiles>
+</project>
