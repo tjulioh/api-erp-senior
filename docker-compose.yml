@@ -12,6 +12,7 @@ services:
     volumes:
       - 'postgres:/var/lib/postgresql/data'
   aplicacao:
+    image: tjulioh/api-erp-senior:latest
     restart: unless-stopped
     build:
       dockerfile: aplicacao.dockerfile
