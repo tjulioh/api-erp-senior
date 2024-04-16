@@ -1,5 +1,8 @@
 server:
   port: ${SERVER_PORT:8080}
+  tomcat:
+    threads:
+      max: 1
 
 spring:
   session:
@@ -26,10 +29,10 @@ tjulioh:
   allowed:
     origins: ${TJULIOH_ALLOWED_ORIGINS:http://localhost:4200}
 
-logging:
-  level:
-    sql: DEBUG
-    org.hibernate.orm.jdbc.bind: TRACE
+#logging:
+#  level:
+#    sql: DEBUG
+#    org.hibernate.orm.jdbc.bind: TRACE
 #    org:
 #      hibernate:
 #        sql: DEBUG
