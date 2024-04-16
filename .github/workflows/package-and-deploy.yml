@@ -1,7 +1,7 @@
 name: Criar e publicar imagem Docker
 on:
   push:
-    branches: ['release']
+    branches: ['main']
 env:
   REGISTRY: ghcr.io
   DOCKERFILE_NAME: aplicacao.dockerfile
