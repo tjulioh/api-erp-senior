@@ -12,7 +12,7 @@ Executar empacotamento do maven e criar imagem no Docker:
 2. `docker-compose up -d --force-recreate --build`
 
 Iniciar somente o PostgreSQL:
-1. `docker-compose up -d postgres`
+1. `docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:alpine`
 
 Parar a execução removendo os volumes e imagens:
 1. `docker-compose down --rmi all -v`
