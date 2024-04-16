@@ -27,12 +27,9 @@ services:
       SPRING_LIQUIBASE_URL: jdbc:postgresql://postgres:5432/postgres
       SPRING_LIQUIBASE_USER: postgres
       SPRING_LIQUIBASE_PASSWORD: postgres
-      SERVER_PORT: 8443
+      SERVER_PORT: 8180
       TJULIOH_ALLOWED_ORIGINS: http://localhost:4200
     ports:
-      - '8443:8443'
-    volumes:
-      - 'aplicacao:/tmp'
+      - '8180:8180'
 volumes:
   postgres:
-  aplicacao:
