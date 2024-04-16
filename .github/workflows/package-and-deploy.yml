@@ -55,7 +55,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker rm $(docker stop $(docker ps -a -q --filter ancestor=${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}))
             docker rmi ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}
             docker pull ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}

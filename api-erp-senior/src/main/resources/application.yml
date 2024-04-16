@@ -2,7 +2,7 @@ server:
   port: ${SERVER_PORT:8080}
   tomcat:
     threads:
-      max: 64
+      max: 1
 
 spring:
   session:
