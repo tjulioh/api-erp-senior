@@ -59,4 +59,4 @@ jobs:
             docker rm $(docker stop $(docker ps -a -q --filter ancestor=${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}))
             docker rmi ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}
             docker pull ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}
-            docker run --name ${{ github.event.repository.name }} -d ${{ secrets.CONTAINER_PORTS }} ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }} ${{ secrets.CONTAINER_ENVIRONMENT }}
+            docker run --name ${{ github.event.repository.name }} ${{ secrets.CONTAINER_PORTS }} ${{ secrets.CONTAINER_ENVIRONMENT }} -d ${{ env.REGISTRY }}/${{ env.REPOSITORY_NAME }}:${{ env.BRANCH_NAME }}
