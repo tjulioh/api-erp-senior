@@ -11,11 +11,11 @@ spring:
         show_sql: true
         format_sql: true
   datasource:
-    url:  ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    url:  ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/erpsenior}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   liquibase:
-    url: ${SPRING_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    url: ${SPRING_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/erpsenior}
     user: ${SPRING_LIQUIBASE_USER:postgres}
     password: ${SPRING_LIQUIBASE_PASSWORD:postgres}
     enabled: true

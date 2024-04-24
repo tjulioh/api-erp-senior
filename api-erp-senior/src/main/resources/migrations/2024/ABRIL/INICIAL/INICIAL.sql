@@ -1,8 +1,6 @@
 --liquibase formatted sql
 
 --changeset thiago.julio:1 context:teste,producao
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
 create table PEDIDOS (id uuid DEFAULT gen_random_uuid() primary key, descricao varchar(250), numero integer, situacao integer,criado timestamp,
                       desconto decimal(10,2));
 
