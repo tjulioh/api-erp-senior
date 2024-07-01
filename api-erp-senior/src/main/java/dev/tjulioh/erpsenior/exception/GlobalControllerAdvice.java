@@ -8,39 +8,40 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class ControllerAdvisor {
+public class GlobalControllerAdvice {
 
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<Object> handleException(ConstraintViolationException e) {
 
         return bodyException(
-                String.format("Houve um problema ao validar o objeto enviado: %s", e.getMessage()),
+                "Houve um problema ao validar o objeto enviado",
                 e.getLocalizedMessage(),
                 e.getConstraintViolations().toString(),
-                HttpStatus.INTERNAL_SERVER_ERROR
+                HttpStatus.NOT_ACCEPTABLE
         );
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
     public ResponseEntity<Object> handleException(HttpMessageNotReadableException e) {
         return bodyException(
-                String.format("Objeto enviado invalido: %s", e.getMessage()),
+                "Objeto enviado invalido",
                 e.getLocalizedMessage(),
-                null,
-                HttpStatus.INTERNAL_SERVER_ERROR
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST
         );
     }
 
     @ExceptionHandler({NullPointerException.class})
     public ResponseEntity<Object> handleException(NullPointerException e) {
         return bodyException(
-                String.format("Objeto nao pode ser nulo: %s", e.getMessage()),
+                "Objeto nao pode ser nulo",
                 e.getLocalizedMessage(),
-                null,
+                e.getMessage(),
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
@@ -48,20 +49,30 @@ public class ControllerAdvisor {
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<Object> handleException(IllegalArgumentException e) {
         return bodyException(
-                String.format("O argumento deve ser valido: %s", e.getMessage()),
+                "O argumento deve ser valido",
                 e.getLocalizedMessage(),
-                null,
-                HttpStatus.INTERNAL_SERVER_ERROR
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST
         );
     }
 
-    public ResponseEntity<Object> bodyException(String mensagem, String causa, String rastro, HttpStatus status) {
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseEntity<Object> handleException(NotFoundException e) {
+        return bodyException(
+                "A entidade nao foi encontrada",
+                e.getLocalizedMessage(),
+                Arrays.toString(e.getStackTrace()),
+                HttpStatus.NOT_FOUND
+        );
+    }
+
+    public ResponseEntity<Object> bodyException(String mensagem, String causa, String processo, HttpStatus status) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("dataHora", LocalDateTime.now());
         body.put("mensagem", mensagem);
         body.put("causa", causa);
-        body.put("rastro", rastro);
+        body.put("processo", processo);
 
         return new ResponseEntity<>(body, status);
     }

@@ -1,8 +1,13 @@
 package dev.tjulioh.erpsenior.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.ValidationException;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,7 +24,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "PEDIDOS")
-public class Pedido implements AbstractEntity {
+public class Pedido extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

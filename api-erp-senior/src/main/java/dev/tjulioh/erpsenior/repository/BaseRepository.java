@@ -1,20 +1,23 @@
 package dev.tjulioh.erpsenior.repository;
 
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.*;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.JPQLTemplates;
 import com.querydsl.jpa.impl.JPAQuery;
 import dev.tjulioh.erpsenior.domain.AbstractEntity;
 import dev.tjulioh.erpsenior.domain.Pagina;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Repository
-public class BasicRepository {
+public class BaseRepository {
 
     private static final String OBJETO_VAZIO = "O objeto nao deve estar vazio";
     private static final String OBJETO_INEXISTENTE = "O objeto deve existir";
@@ -23,7 +26,7 @@ public class BasicRepository {
     private final JPQLTemplates jpqlTemplates;
     private final PathBuilderFactory pathBuilderFactory;
 
-    public BasicRepository(
+    public BaseRepository(
             EntityManager entityManager,
             JPQLTemplates jpqlTemplates,
             PathBuilderFactory pathBuilderFactory) {
@@ -32,26 +35,31 @@ public class BasicRepository {
         this.pathBuilderFactory = pathBuilderFactory;
     }
 
-    public <T> JPAQuery<T> query(Class<T> entityClass, Predicate... where) {
+    public <T> JPAQuery<T> query(Class<T> clazz, Predicate where, OrderSpecifier<?>[] order) {
         JPAQuery<T> query = new JPAQuery<>(this.entityManager, this.jpqlTemplates);
-        query.from(this.pathBuilderFactory.create(entityClass));
+        query.from(this.pathBuilderFactory.create(clazz));
 
         if (Objects.nonNull(where)) {
             query.where(where);
         }
 
+        if (Objects.nonNull(order)) {
+            query.orderBy(order);
+        }
+
         return query;
     }
 
-    public <T> Pagina<T> findAll(Class<T> entityClass, Long offset, Long limit, Predicate... where) {
-        return this.findAll(entityClass, PageRequest.of(Math.toIntExact(offset), Math.toIntExact(limit)), where);
+    public <T> JPAQuery<T> query(Class<T> clazz, Predicate where) {
+        return this.query(clazz, where, null);
     }
 
-    public <T> Pagina<T> findAll(Class<T> entityClass, PageRequest pageRequest, Predicate... where) {
-        Long offset = pageRequest.getOffset();
-        Long limit = (long) pageRequest.getPageSize();
+    public <T> JPAQuery<T> query(Class<T> clazz) {
+        return this.query(clazz, null, null);
+    }
 
-        JPAQuery<T> query = this.findAll(entityClass, where);
+    public <T> Pagina<T> findAll(Class<T> clazz, Long offset, Long limit, Predicate where, OrderSpecifier<?>[] order) {
+        JPAQuery<T> query = this.query(clazz, where, order);
 
         Long total = query.fetchCount();
 
@@ -80,31 +88,27 @@ public class BasicRepository {
                 .build();
     }
 
-    public <T> JPAQuery<T> findAll(Class<T> entityClass, Predicate... where) {
-        return this.query(entityClass, where);
+    public <T> T findOne(Class<T> clazz, Predicate where) {
+        return this.query(clazz).where(where).fetchOne();
     }
 
-    public <T> T findOne(Class<T> entityClass, Predicate... where) {
-        return this.query(entityClass).where(where).fetchOne();
+    public <T> T findById(Class<T> clazz, UUID id) {
+        return this.entityManager.find(clazz, id);
     }
 
-    public <T> T findById(Class<T> entityClass, UUID id) {
-        return this.entityManager.find(entityClass, id);
+    public <T> long count(Class<T> clazz, Predicate where) {
+        return this.query(clazz, where).fetchCount();
     }
 
-    public <T> long count(Class<T> entityClass, Predicate... where) {
-        return this.query(entityClass, where).fetchCount();
-    }
-
-    public <T> boolean exists(Class<T> entityClass, Predicate... where) {
-        return Objects.nonNull(this.query(entityClass, where).select(Expressions.ONE).limit(1L).fetchOne());
+    public <T> boolean exists(Class<T> clazz, Predicate where) {
+        return Objects.nonNull(this.query(clazz, where).select(Expressions.ONE).limit(1L).fetchOne());
     }
 
     @Transactional
-    public <T> void remove(Class<T> entityClass, UUID id) {
+    public <T> void remove(Class<T> clazz, UUID id) {
         Objects.requireNonNull(id, OBJETO_VAZIO);
 
-        Object existing = this.entityManager.find(entityClass, id);
+        Object existing = this.entityManager.find(clazz, id);
         Objects.requireNonNull(existing, OBJETO_INEXISTENTE);
 
         this.entityManager.remove(existing);

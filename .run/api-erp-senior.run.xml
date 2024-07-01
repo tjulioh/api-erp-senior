@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="api-erp-senior" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="api-erp-senior" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="dev.tjulioh.erpsenior.ServerApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,6 +1,10 @@
 package dev.tjulioh.erpsenior.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.ValidationException;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +18,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "ITENS")
-public class Item implements AbstractEntity {
+public class Item extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
