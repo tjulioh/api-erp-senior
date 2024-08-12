@@ -1,7 +1,5 @@
 package dev.tjulioh.erpsenior.controller;
 
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Predicate;
 import dev.tjulioh.erpsenior.domain.AbstractEntity;
 import dev.tjulioh.erpsenior.domain.Pagina;
 import dev.tjulioh.erpsenior.service.AbstractService;
@@ -21,7 +19,7 @@ public abstract class AbstractController<T extends AbstractEntity> {
 
     private final AbstractService<T> abstractService;
 
-    public AbstractController(AbstractService<T> abstractService) {
+    protected AbstractController(AbstractService<T> abstractService) {
         this.abstractService = abstractService;
     }
 

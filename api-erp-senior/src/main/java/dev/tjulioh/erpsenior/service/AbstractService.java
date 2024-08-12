@@ -1,13 +1,11 @@
 package dev.tjulioh.erpsenior.service;
 
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Predicate;
 import dev.tjulioh.erpsenior.domain.AbstractEntity;
 import dev.tjulioh.erpsenior.domain.Pagina;
 import dev.tjulioh.erpsenior.exception.NotFoundException;
 import dev.tjulioh.erpsenior.repository.BaseRepository;
-import dev.tjulioh.erpsenior.util.OrderSpecifierConverter;
-import dev.tjulioh.erpsenior.util.PredicateConverter;
+import dev.tjulioh.antlr.querydsl.filter.converter.OrderSpecifierConverter;
+import dev.tjulioh.antlr.querydsl.filter.converter.PredicateConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -29,7 +27,7 @@ public abstract class AbstractService<T extends AbstractEntity> {
     }
 
     public Pagina<T> findAll(Long offset, Long limit, String filter, String sort) {
-        return repository.findAll(clazz, offset, limit, toPredicate(filter), toOrderSpecifier(sort));
+        return repository.findAll(clazz, offset, limit, predicateConverter.toPredicate(filter), orderSpecifierConverter.toOrderSpecifier(sort));
     }
 
     public T findById(UUID id) {
@@ -50,19 +48,5 @@ public abstract class AbstractService<T extends AbstractEntity> {
 
     public void delete(UUID id) {
         repository.remove(clazz, id);
-    }
-
-    public Predicate toPredicate(String filter) {
-        if (Objects.nonNull(filter)) {
-            return predicateConverter.toPredicate(filter);
-        }
-        return null;
-    }
-
-    public OrderSpecifier<?>[] toOrderSpecifier(String sort) {
-        if (Objects.nonNull(sort)) {
-            return orderSpecifierConverter.toOrderSpecifier(sort);
-        }
-        return null;
     }
 }

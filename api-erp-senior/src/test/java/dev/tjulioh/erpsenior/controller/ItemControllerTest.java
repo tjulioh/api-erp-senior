@@ -1,6 +1,9 @@
 package dev.tjulioh.erpsenior.controller;
 
-import dev.tjulioh.erpsenior.domain.*;
+import dev.tjulioh.erpsenior.domain.Item;
+import dev.tjulioh.erpsenior.domain.ItemTipo;
+import dev.tjulioh.erpsenior.domain.Pedido;
+import dev.tjulioh.erpsenior.domain.PedidoSituacao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

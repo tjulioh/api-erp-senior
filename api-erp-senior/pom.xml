@@ -16,111 +16,127 @@
     <description>api-erp-senior</description>
     <properties>
         <java.version>21</java.version>
-        <docker.image.prefix>tjulioh</docker.image.prefix>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>true</skipTests>
+        <antlr-querydsl-filter.version>0.1.3</antlr-querydsl-filter.version>
+        <querydsl-core.version>5.1.0</querydsl-core.version>
+        <querydsl-apt.version>5.1.0</querydsl-apt.version>
+        <querydsl-jpa.version>5.1.0</querydsl-jpa.version>
+        <spring-boot-starter-web.version>3.3.2</spring-boot-starter-web.version>
+        <spring-boot-starter-test.version>3.3.2</spring-boot-starter-test.version>
+        <spring-boot-starter-starter.version>3.3.2</spring-boot-starter-starter.version>
+        <spring-boot-starter-validation.version>3.3.2</spring-boot-starter-validation.version>
+        <spring-boot-starter-data-jpa.version>3.3.2</spring-boot-starter-data-jpa.version>
+        <spring-boot-starter-jdbc.version>3.3.2</spring-boot-starter-jdbc.version>
+        <spring-boot-maven-plugin.version>3.3.2</spring-boot-maven-plugin.version>
+        <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+        <spring-session-jdbc.version>3.3.1</spring-session-jdbc.version>
+        <spring-beans.version>6.1.11</spring-beans.version>
+        <spring-web.version>6.1.11</spring-web.version>
+        <spring-webmvc.version>6.1.11</spring-webmvc.version>
+        <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
+        <annotations.version>24.1.0</annotations.version>
+        <postgresql.version>42.7.3</postgresql.version>
+        <liquibase-core.version>4.29.1</liquibase-core.version>
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring-beans.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.2.3</version>
+            <version>${spring-boot-starter-web.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>3.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>6.1.5</version>
+            <version>${spring-boot-starter-test.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>3.2.3</version>
+            <version>${spring-boot-starter-starter.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>3.2.0</version>
+            <version>${spring-boot-starter-validation.version}</version>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
             <classifier>jakarta</classifier>
-            <version>5.0.0</version>
+            <version>${querydsl-apt.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <classifier>jakarta</classifier>
-            <version>5.0.0</version>
+            <version>${querydsl-jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>
-            <version>5.0.0</version>
+            <version>${querydsl-core.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.2</version>
+            <version>${jakarta.validation-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
+            <version>${annotations.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.2.3</version>
+            <version>${spring-boot-starter-data-jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>3.2.0</version>
+            <version>${spring-boot-starter-jdbc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-jdbc</artifactId>
-            <version>3.2.0</version>
+            <version>${spring-session-jdbc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>4.26.0</version>
+            <version>${liquibase-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.spotify</groupId>
-            <artifactId>dockerfile-maven-plugin</artifactId>
-            <version>1.4.13</version>
+            <groupId>dev.tjulioh</groupId>
+            <artifactId>antlr-querydsl-filter</artifactId>
+            <version>${antlr-querydsl-filter.version}</version>
         </dependency>
     </dependencies>
     <build>
         <finalName>aplicacao</finalName>
         <plugins>
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -132,7 +148,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>${skipTests}</skipTests>
                 </configuration>
@@ -140,7 +156,7 @@
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
-                <version>1.1.3</version>
+                <version>${apt-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
