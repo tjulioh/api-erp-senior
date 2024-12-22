@@ -1,4 +1,4 @@
-package dev.tjulioh.erpsenior.security;
+package dev.tjulioh.erpsenior.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

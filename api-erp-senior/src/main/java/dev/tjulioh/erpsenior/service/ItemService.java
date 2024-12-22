@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemService extends AbstractService<Item> {
 
-    private final BaseRepository repository;
-
     public ItemService(BaseRepository repository) {
         super(repository, Item.class);
-        this.repository = repository;
     }
 }

@@ -63,25 +63,25 @@ class PedidoItemTest {
     @Test
     void deveExistirQuantidade() {
         PedidoItem pedidoItem = criarPedidoItem();
-        assertEquals(pedidoItem.getQuantidade(), 5);
+        assertEquals(5, pedidoItem.getQuantidade());
     }
 
     @Test
     void deveExistirValor() {
         PedidoItem pedidoItem = criarPedidoItem();
-        assertEquals(pedidoItem.getValor(), BigDecimal.valueOf(65.7));
+        assertEquals(BigDecimal.valueOf(65.7), pedidoItem.getValor());
     }
 
     @Test
     void deveExistirItem() {
         PedidoItem pedidoItem = criarPedidoItem();
-        assertEquals(pedidoItem.getItem().getDescricao(), "Livro Clean Code");
+        assertEquals("Livro Clean Code", pedidoItem.getItem().getDescricao());
     }
 
     @Test
     void deveExistirPedido() {
         PedidoItem pedidoItem = criarPedidoItem();
-        assertEquals(pedidoItem.getPedido().getDescricao(), "Pedido com desconto");
+        assertEquals("Pedido com desconto", pedidoItem.getPedido().getDescricao());
     }
 
     @Test

@@ -123,6 +123,7 @@ public class PedidoItem extends AbstractEntity {
         }
     }
 
+    @Override
     public UUID getId() {
         return id;
     }

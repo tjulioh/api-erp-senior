@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PedidoItemService extends AbstractService<PedidoItem> {
 
-    private final BaseRepository repository;
-
     public PedidoItemService(BaseRepository repository) {
         super(repository, PedidoItem.class);
-        this.repository = repository;
     }
 }

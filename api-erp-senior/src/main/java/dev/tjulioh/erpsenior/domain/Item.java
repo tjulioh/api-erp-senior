@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -36,21 +37,25 @@ public class Item extends AbstractEntity {
     @NotNull(message = "O item é obrigatório")
     private ItemTipo tipo;
 
+    private LocalDateTime validade;
+
     @NotNull(message = "A situacao é obrigatório")
     private Boolean ativo;
 
     public Item() {
     }
 
-    public Item(Boolean ativo, String descricao, UUID id, ItemTipo tipo, BigDecimal valor) {
+    public Item(Boolean ativo, String descricao, UUID id, ItemTipo tipo, BigDecimal valor, LocalDateTime validade) {
         this.ativo = ativo;
         this.descricao = descricao;
         this.id = id;
         this.tipo = tipo;
         this.valor = valor;
+        this.validade = validade;
     }
 
-    private Item(Builder builder) {
+    public Item( Builder builder) {
+        this.validade = builder.validade;
         this.ativo = builder.ativo;
         this.descricao = builder.descricao;
         this.id = builder.id;
@@ -64,6 +69,7 @@ public class Item extends AbstractEntity {
         private UUID id;
         private ItemTipo tipo;
         private BigDecimal valor;
+        private LocalDateTime validade;
 
         public Builder ativo(Boolean ativo) {
             this.ativo = ativo;
@@ -90,8 +96,13 @@ public class Item extends AbstractEntity {
             return this;
         }
 
+        public Builder validade(LocalDateTime validade) {
+            this.validade = validade;
+            return this;
+        }
+
         public Item build() {
-            Item item = new Item(ativo, descricao, id, tipo, valor);
+            Item item = new Item(ativo, descricao, id, tipo, valor, validade);
             validate(item);
             return item;
         }
@@ -132,6 +143,7 @@ public class Item extends AbstractEntity {
         this.descricao = descricao;
     }
 
+    @Override
     public UUID getId() {
         return id;
     }
@@ -154,5 +166,13 @@ public class Item extends AbstractEntity {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public LocalDateTime getValidade() {
+        return validade;
+    }
+
+    public void setValidade(LocalDateTime validade) {
+        this.validade = validade;
     }
 }

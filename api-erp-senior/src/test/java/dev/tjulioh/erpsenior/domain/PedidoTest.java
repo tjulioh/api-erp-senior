@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class PedidoTest {
 
-    private Pedido criarPedido(){
+    private Pedido criarPedido() {
         return new Pedido.Builder()
                 .id(UUID.randomUUID())
                 .criado(LocalDateTime.now())
@@ -24,7 +24,7 @@ class PedidoTest {
                 .build();
     }
 
-    private Item criarItem(){
+    private Item criarItem() {
         return new Item.Builder()
                 .descricao("Livro Clean Code")
                 .valor(BigDecimal.valueOf(65.7))
@@ -34,61 +34,61 @@ class PedidoTest {
     }
 
     @Test
-     void deveCriarPedido(){
+    void deveCriarPedido() {
         Pedido pedido = criarPedido();
         assertNotNull(pedido);
     }
 
     @Test
-     void deveCriarPedidoSituacaoAberto(){
+    void deveCriarPedidoSituacaoAberto() {
         Pedido pedido = criarPedido();
         assertEquals(PedidoSituacao.ABERTO, pedido.getSituacao());
     }
 
     @Test
-     void deveAdicionarItemAoPedido(){
+    void deveAdicionarItemAoPedido() {
         Pedido pedido = criarPedido();
         Item item = criarItem();
 
-        pedido.addItem(item, 5,item.getValor());
+        pedido.addItem(item, 5, item.getValor());
 
         assertEquals(item, pedido.getItens().getFirst().getItem());
     }
 
     @Test
-     void deveAplicarDesconto(){
+    void deveAplicarDesconto() {
         Pedido pedido = criarPedido();
         Item item = criarItem();
 
         pedido.addItem(item, 5, BigDecimal.valueOf(5));
 
-        assertEquals(pedido.getValorTotalComDesconto(), BigDecimal.valueOf(23.75));
+        assertEquals(BigDecimal.valueOf(23.75), pedido.getValorTotalComDesconto());
     }
 
     @Test
-    void deveRetornarTotal(){
+    void deveRetornarTotal() {
         Pedido pedido = criarPedido();
         Item item = criarItem();
 
         pedido.addItem(item, 5, BigDecimal.valueOf(5));
 
-        assertEquals(pedido.getValorTotal(), BigDecimal.valueOf(25));
+        assertEquals(BigDecimal.valueOf(25), pedido.getValorTotal());
     }
 
     @Test
-     void deveExistirDesconto(){
+    void deveExistirDesconto() {
         Pedido pedido = criarPedido();
-        assertEquals(pedido.getDesconto(), BigDecimal.valueOf(5.0));
+        assertEquals(BigDecimal.valueOf(5.0), pedido.getDesconto());
     }
 
     @Test
-     void deveExistirDescricao(){
+    void deveExistirDescricao() {
         Pedido pedido = criarPedido();
         assertEquals("Pedido com desconto", pedido.getDescricao());
     }
 
     @Test
-     void deveExistirNumero(){
+    void deveExistirNumero() {
         Pedido pedido = criarPedido();
         assertEquals(1, pedido.getNumero());
     }

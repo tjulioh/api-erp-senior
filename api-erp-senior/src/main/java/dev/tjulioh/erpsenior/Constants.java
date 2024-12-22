@@ -1,8 +1,8 @@
-package dev.tjulioh.erpsenior.util;
+package dev.tjulioh.erpsenior;
 
-public class ConstantUtil {
+public class Constants {
 
-    private ConstantUtil() {
+    private Constants() {
     }
 
     public static final String OBJETO_VAZIO = "O objeto nao deve estar vazio";

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("pedido-item")
-public class PedidoItemController extends AbstractController<PedidoItem>{
+public class PedidoItemController extends AbstractController<PedidoItem> {
 
     public PedidoItemController(PedidoItemService pedidoItemService) {
         super(pedidoItemService);

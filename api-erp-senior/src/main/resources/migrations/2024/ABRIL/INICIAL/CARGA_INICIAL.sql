@@ -37,10 +37,10 @@ VALUES ('d574258a-538b-4b45-9b38-4629bfe3ce57', 'PEDIDO 7', 4, 1, '2024-04-05 09
 --rollback not required
 
 --changeset thiago.julio:2 context:teste,producao
-INSERT INTO public.itens (id, descricao, valor, ativo, tipo)
-VALUES ('7d03ff2d-4a2a-4150-8138-92bd718302ee', 'LIVRO CLEAN CODE', 59.99, true, 1);
-INSERT INTO public.itens (id, descricao, valor, ativo, tipo)
-VALUES ('f74a1378-1982-403f-a758-6b563003727d', 'LIVRO GO HORSE', 77.77, false, 1);
+INSERT INTO public.itens (id, descricao, valor, ativo, tipo, validade)
+VALUES ('7d03ff2d-4a2a-4150-8138-92bd718302ee', 'LIVRO CLEAN CODE', 59.99, true, 1,'2024-04-05 09:11:35.379093');
+INSERT INTO public.itens (id, descricao, valor, ativo, tipo, validade)
+VALUES ('f74a1378-1982-403f-a758-6b563003727d', 'LIVRO GO HORSE', 77.77, false, 1,'2024-04-05 09:11:35.379093');
 INSERT INTO public.itens (id, descricao, valor, ativo, tipo)
 VALUES ('ee50d252-f96f-42a0-b23d-fb3eb4ba3081', 'SERVICO DE IA', 299.99, true, 0);
 --rollback not required

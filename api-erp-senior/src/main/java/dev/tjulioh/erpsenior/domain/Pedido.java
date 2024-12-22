@@ -67,7 +67,7 @@ public class Pedido extends AbstractEntity {
         this.situacao = situacao;
     }
 
-    private Pedido(Builder builder) {
+    public Pedido(Builder builder) {
         this.criado = builder.criado;
         this.desconto = builder.desconto;
         this.descricao = builder.descricao;
@@ -180,6 +180,7 @@ public class Pedido extends AbstractEntity {
         this.descricao = descricao;
     }
 
+    @Override
     public UUID getId() {
         return id;
     }
